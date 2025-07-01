@@ -35,14 +35,14 @@ export default function Home() {
         
         <FeatureCard>
           <FeatureIcon>🔍</FeatureIcon>
-          <FeatureTitle>레시피 검색</FeatureTitle>
-          <FeatureDesc>보유한 재료로 만들 수 있는 레시피를 찾아드려요.</FeatureDesc>
+          <FeatureTitle>레시피 확인</FeatureTitle>
+          <FeatureDesc>예전에 만들었던 레시피를 찾아보세요.</FeatureDesc>
         </FeatureCard>
         
         <FeatureCard>
           <FeatureIcon>⭐</FeatureIcon>
-          <FeatureTitle>인기 레시피</FeatureTitle>
-          <FeatureDesc>다른 사용자들이 좋아하는 레시피를 확인하세요.</FeatureDesc>
+          <FeatureTitle>레시피 관리</FeatureTitle>
+          <FeatureDesc>보유한 재료로 만들 수 있는 레시피를 등록해보세요.</FeatureDesc>
         </FeatureCard>
       </FeatureSection>
     </Layout>

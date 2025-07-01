@@ -18,7 +18,6 @@ class Ingredient(Base):
     unit = Column(String(20), nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     
-    # Relationship
     recipe_ingredients = relationship("RecipeIngredient", back_populates="ingredient")
 
 class Recipe(Base):
@@ -34,7 +33,6 @@ class Recipe(Base):
     image_url = Column(String(500))
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     
-    # Relationships
     ingredients = relationship("RecipeIngredient", back_populates="recipe")
     ratings = relationship("Rating", back_populates="recipe")
     
@@ -53,7 +51,6 @@ class RecipeIngredient(Base):
     quantity = Column(Float, nullable=False)
     unit = Column(String(20), nullable=False)
     
-    # Relationships
     recipe = relationship("Recipe", back_populates="ingredients")
     ingredient = relationship("Ingredient", back_populates="recipe_ingredients")
 
@@ -62,9 +59,8 @@ class Rating(Base):
     
     id = Column(Integer, primary_key=True, index=True)
     recipe_id = Column(Integer, ForeignKey("recipes.id"), nullable=False)
-    rating = Column(Integer, nullable=False)  # 1-5 stars
+    rating = Column(Integer, nullable=False)
     comment = Column(Text)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     
-    # Relationship
     recipe = relationship("Recipe", back_populates="ratings")

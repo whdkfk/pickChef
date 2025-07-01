@@ -4,7 +4,6 @@ from .database import engine
 from . import models
 from .routers import ingredients, recipes
 
-# Create database tables
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
@@ -13,16 +12,14 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:3000"],  # React dev server
+    allow_origins=["http://localhost:5173", "http://localhost:3000"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Include routers
 app.include_router(ingredients.router, prefix="/api")
 app.include_router(recipes.router, prefix="/api")
 

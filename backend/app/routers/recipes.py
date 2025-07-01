@@ -18,7 +18,9 @@ def read_recipes(skip: int = 0, limit: int = 100, db: Session = Depends(get_db))
 
 @router.post("/", response_model=schemas.Recipe, status_code=status.HTTP_201_CREATED)
 def create_recipe(recipe: schemas.RecipeCreate, db: Session = Depends(get_db)):
+    print(">>> recipe:", recipe)
     for ingredient_data in recipe.ingredients:
+        print(">>> checking ingredient:", ingredient_data)
         db_ingredient = crud.get_ingredient(db, ingredient_data.ingredient_id)
         if not db_ingredient:
             raise HTTPException(

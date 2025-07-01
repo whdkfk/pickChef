@@ -39,20 +39,34 @@ export default function CreateRecipe() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.title || !formData.instructions) {
       alert('제목과 조리법은 필수입니다!');
       return;
     }
 
+    const parsedTime = parseInt(formData.cooking_time);
+
+    if (formData.cooking_time !== '' && (isNaN(parsedTime) || parsedTime <= 0)) {
+      alert('조리 시간은 1분 이상이어야 합니다!');
+      return;
+    }
+
     const recipeData: CreateRecipeData = {
-      ...formData,
-      cooking_time: formData.cooking_time ? parseInt(formData.cooking_time) : undefined,
-      ingredients
+      title: formData.title,
+      description: formData.description,
+      instructions: formData.instructions,
+      difficulty: formData.difficulty,
+      servings: formData.servings,
+      image_url: formData.image_url,
+      ingredients,
+      ...(parsedTime > 0 ? { cooking_time: parsedTime } : {})
     };
 
     createMutation.mutate(recipeData);
   };
+
+
 
   const addIngredient = () => {
     setIngredients(prev => [...prev, { ingredient_id: 0, quantity: 0, unit: '' }]);
@@ -162,7 +176,7 @@ export default function CreateRecipe() {
                   재료 추가
                 </AddIngredientBtn>
               </IngredientsHeader>
-              
+
               <IngredientsList>
                 {ingredients.map((ingredient, index) => (
                   <IngredientRow key={index}>

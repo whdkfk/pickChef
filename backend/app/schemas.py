@@ -8,7 +8,6 @@ class DifficultyEnum(str, Enum):
     medium = "medium"
     hard = "hard"
 
-# Ingredient Schemas
 class IngredientBase(BaseModel):
     name: str = Field(..., min_length=1, max_length=100)
     category: str = Field(..., min_length=1, max_length=50)
@@ -29,7 +28,6 @@ class Ingredient(IngredientBase):
     class Config:
         from_attributes = True
 
-# Recipe Ingredient Schemas
 class RecipeIngredientBase(BaseModel):
     ingredient_id: int = Field(..., gt=0)
     quantity: float = Field(..., gt=0)
@@ -45,7 +43,6 @@ class RecipeIngredient(RecipeIngredientBase):
     class Config:
         from_attributes = True
 
-# Recipe Schemas
 class RecipeBase(BaseModel):
     title: str = Field(..., min_length=1, max_length=200)
     description: Optional[str] = None
@@ -76,7 +73,6 @@ class Recipe(RecipeBase):
     class Config:
         from_attributes = True
 
-# Rating Schemas
 class RatingBase(BaseModel):
     rating: int = Field(..., ge=1, le=5)
     comment: Optional[str] = None
